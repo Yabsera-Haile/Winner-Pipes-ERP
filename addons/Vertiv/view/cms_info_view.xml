@@ -1,0 +1,248 @@
+<odoo>
+
+
+    <record id="cms_info_model_tree_view" model="ir.ui.view">
+        <field name="name">Call Info List</field>
+        <field name="model">cms.info.model</field>
+        <field name="arch" type="xml">
+
+            <tree string="Call info" create="false">
+                <field name="call_no" string="Call No" width="80"/>
+                <field name="call_type" string="Type" width="40"/>
+                <field name="fault_reported" string="Fault reported" width="80"/>
+                <field name="call_log_date" widget="date" string="Log Date" width="40"/>
+                <field name="customer_name" string="Customer Name"/>
+                <field name="customer_city" string="City"/>
+                <field name="customer_state" string="State"/>
+                <field name="sr_group" string="SR Group" width="12"/>
+                <field name="sr_owner" string="SR Owner" width="12"/>
+                <field name="zone" string="Zone" width="12"/>
+                <field name="engineerId" string="Engineer" width="12"/>
+                <field name="teamlead" string="Team Lead" width="12"/>
+                <field name="call_status" string="Status" width="40"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="cms_info_model_form_view" model="ir.ui.view">
+        <field name="name">Call Info Form</field>
+        <field name="model">cms.info.model</field>
+           <field name="groups_id" eval="[(4, ref('engineer_group')),(4, ref('tl_group'))]"/>
+        <field name="arch" type="xml">
+            <form string="CMS info" create="false" edit="true">
+
+                <sheet>
+
+                    <div class="oe_title">
+                        <h1>
+                            <label for="call_no" class="oe_edit_only"/>
+                            <field name="call_no" width="50" readonly="1"/>
+                        </h1>
+                    </div>
+                    <div class="oe_title">
+                        <h4>
+                            <label for="customer_name" class="oe_edit_only"/>
+                            <field name="customer_name" readonly='1' width="50"/>
+                        </h4>
+                    </div>
+                    <group col="2">
+                        <group name="group_left" string="Call Details" readonly="0">
+                            <field name="call_status" string="Call Status" readonly="1" width="50"/>
+                            <field name="call_type" string="Call Type" width="40" readonly="1"/>
+
+                            <field name="call_incident_date" string="Call Incident Date" width="40" readonly="1"/>
+                            <field name="call_log_date" string="Call Log Date" readonly="1" width="40"
+                                   widget="datettime"/>
+
+                            <!--                            <field name="call_assignment_date" string="Assigned Date" readonly="1"/>-->
+                            <!--                           <field name="enpi_eng_id" string="Engineer CMS" width="60"/>-->
+                            <field name="call_accepted_date" string="Accepted Date" readonly="1"/>
+                            <!--                            <field name="call_attended_date" string="Attended Date" readonly="1"/>-->
+                            <!--                            <field name="call_sla" string="SLA"/>-->
+                            <field name="call_actual_startdate" string="Attended Date" readonly="1" width="12"/>
+                            <field name="call_actual_enddate" string="Call Completed Date" width="12" readonly="1"/>
+
+                        </group>
+                        <group string="Customer site">
+                            <field name="customer_site_address" string="Name" readonly="1"/>
+                            <field name="customer_contact_person" readonly="1"/>
+                            <field name="customer_contact_mobile" readonly="1"/>
+
+                            <field name="customer_email" readonly="1"/>
+                        </group>
+                        <group name="group_left" string="Product details" readonly="1">
+                            <field name="product_group" readonly="1"/>
+                            <field name="product_model" readonly="1"/>
+                            <field name="product_serialno" string="Serial number" readonly="1"/>
+                            <field name="product_code" readonly="1"/>
+                            <field name="product_rating" string="Rating" readonly="1"/>
+                        </group>
+                        <group string="Contract details" readonly="1">
+                            <field name="warranty_status" readonly="1"/>
+                            <field name="contract_no" readonly="1"/>
+                            <field name="contract_start_date" string="Start Date" readonly="1"/>
+                            <field name="contract_end_date" string="End Date" readonly="1"/>
+                            <field name="contract_status" string="Rating" readonly="1"/>
+                        </group>
+                        <group string="Supporting Branch">
+                            <field name="zone" string="Zone" readonly="1"/>
+                            <field name="sr_group" string="Branch" readonly="1"/>
+                            <field name="sr_owner" string="Sr Owner" readonly="1"/>
+                            <field name="engineerId" string="Engineer" readonly="1" width="60"/>
+
+                        </group>
+                        <group string="Summary">
+                            <field name="fault_reported" string="Fault Reported" width="40" readonly="1"/>
+                            <field name="problem_code_description" string="Problem Code" readonly="1"
+                                   options="{'no_create_edit': True,'no_open': True,}"/>
+                            <field name="resolution_code_description" string="Resolution Code" readonly="1"
+                                   options="{'no_create_edit': True,'no_open': True,}"/>
+                            <field name="resolution_summary" string="Resolution Summary" readonly="1"
+                                   options="{'no_create_edit': True,'no_open': True,}"/>
+                            <field name="reason_of_pending" string="Reason of Pending" readonly="1"
+                                   options="{'no_create_edit': True,'no_open': True,}"/>
+                        </group>
+                    </group>
+                    <notebook>
+
+                        <page string="Customer" readonly="1">
+                            <group>
+                                <group name="group_left">
+                                    <field name="customer_account_no" readonly="1"/>
+                                    <field name="customer_name" readonly="1"/>
+                                    <field name="customer_address1" readonly="1"/>
+                                    <field name="customer_address2" readonly="1"/>
+                                    <field name="customer_address3" readonly="1"/>
+                                    <field name="customer_city" readonly="1"/>
+                                    <field name="customer_state" readonly="1"/>
+                                    <field name="customer_pincode" readonly="1"/>
+
+                                </group>
+
+                            </group>
+                        </page>
+                        <page string="Travel time" readonly="1">
+
+                            <field name="call_labour_ids"/>
+                            <!--context="{ 'default_punch_category':'Labourtime'}"-->
+                        </page>
+                        <page string="Schedule plan">
+                            <group>
+                                <group string="Planned" readonly="1">
+                                    <field name="call_planned_start_date" string="Start date" width="12" readonly="1"/>
+                                    <field name="call_planned_end_date" string="End date" width="12" readonly="1"/>
+                                </group>
+                                <group string="Schedule">
+                                    <field name="call_schedule_startdate" string="Start date" width="12"
+                                           attrs="{'readonly': [('call_type','ilike','breakdown')]}"/>
+                                    <field name="call_schedule_enddate" string="End date" width="12"
+                                           attrs="{'readonly': [('call_type','ilike','breakdown')]}"/>
+                                      <button name="edit_schedule" type="object" string="Edit" class="btn-primary" groups="Vertiv.engineer_group" />
+                                </group>
+                                <group string="Actual" readonly="1">
+                                    <field name="call_actual_startdate" string="Start date" width="12" readonly="1"/>
+                                    <field name="call_actual_enddate" string="End date" width="12" readonly="1"/>
+                                </group>
+
+
+                            </group>
+                        </page>
+                        <page string="Material" readonly="1">
+
+                            <field name="call_material_ids"/>
+
+                        </page>
+                        <page string="Workbench" readonly="1">
+
+                            <field name="call_workbench_ids"/>
+
+                        </page>
+                        <page string="Timings" readonly="1">
+
+
+                            <field name="call_time_ids"/>
+
+                        </page>
+                        <page string="Part oder info" readonly="1">
+
+                            <field name="call_partorder_ids"/>
+
+                        </page>
+                        <page string="Conversations">
+                            <field name="chat_iframe"/>
+                            <div style="font-size:9px;">
+                                DISCLAIMER:
+                                Vertiv takes no responsibility for the opinions expressed in this chat room; we are
+                                unable to check any facts and therefore cannot attest to the accuracy of information
+                                contained in any discussion thread. Users of this chat room shall remain solely
+                                responsible for the content of their communications.
+                                We urge you not to use language that may be offensive to others, promote violence or
+                                negative issues, advertise products or services, or infringe anyone else’s intellectual
+                                property or proprietary rights (including trademarks, copyright, or rights of publicity
+                                or privacy) or to give out personal information.
+                                Vertiv reserves the right, but not the obligation, to monitor the content of this chat
+                                room and to remove, refuse to post or edit any material or content which we, in our sole
+                                discretion, determine to be objectionable.
+                                When submitting content, please abide by our guidelines, and avoid posting profanity,
+                                personal attacks or harassment. Should you violate our submissions guidelines, we
+                                reserve the right to remove your comments and block your account.
+                            </div>
+
+                        </page>
+                        <page string="Tech Support">
+                            <field name="support_iframe"/>
+                            <div style="font-size:9px;">
+                                DISCLAIMER:
+                                Vertiv takes no responsibility for the opinions expressed in this chat room; we are
+                                unable to check any facts and therefore cannot attest to the accuracy of information
+                                contained in any discussion thread. Users of this chat room shall remain solely
+                                responsible for the content of their communications.
+                                We urge you not to use language that may be offensive to others, promote violence or
+                                negative issues, advertise products or services, or infringe anyone else’s intellectual
+                                property or proprietary rights (including trademarks, copyright, or rights of publicity
+                                or privacy) or to give out personal information.
+                                Vertiv reserves the right, but not the obligation, to monitor the content of this chat
+                                room and to remove, refuse to post or edit any material or content which we, in our sole
+                                discretion, determine to be objectionable.
+                                When submitting content, please abide by our guidelines, and avoid posting profanity,
+                                personal attacks or harassment. Should you violate our submissions guidelines, we
+                                reserve the right to remove your comments and block your account.
+                            </div>
+
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Inherit Form View to Modify it -->
+<!--  -->
+
+        <record model="ir.actions.act_window" id="cms_info_model_action">
+        <field name="name">Call View</field>
+        <field name="res_model">cms.info.model</field>
+        <field name="view_mode">tree,form,pivot</field>
+
+    </record>
+
+
+    <record model="ir.actions.act_window.view" id="call_info_form">
+        <field name="act_window_id" ref="cms_info_model_action"/>
+        <field name="view_id" ref="cms_info_model_form_view"/>
+        <field name="view_mode">form</field>
+        <field name="sequence" eval="3"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="call_info_tree">
+        <field name="act_window_id" ref="cms_info_model_action"/>
+        <field name="view_id" ref="cms_info_model_tree_view"/>
+        <field name="view_mode">tree</field>
+        <field name="sequence" eval="2"/>
+
+    </record>
+
+
+
+</odoo>

@@ -1,0 +1,286 @@
+<odoo>
+
+    <!-- This Menu Item will appear in the Upper bar, That's why It needs NO parent or action -->
+
+    <menuitem id="vertiv_root" name="Field Service" sequence="0" groups="technical_support,engineer_group,tl_group,opr_group,zone_group,warehouse_group,vertiv_admin_group">
+
+        <menuitem id="hr_attendance.menu_hr_attendance_root"
+                  name="Attendances" groups="make_invisible"/>
+
+        <menuitem id="hr.menu_hr_root" name="Employees" groups="make_invisible"/>
+
+<!--        <menuitem id="first_level_menu2"-->
+<!--                  name="Call Summary"-->
+<!--                  sequence="5"-->
+<!--                  action="cms_info_model_action"-->
+<!--                  groups="engineer_group">-->
+<!--        </menuitem>-->
+        <menuitem id="first_level_menu2a"
+                  name="Call Summary"
+                  sequence="2"
+                  action="call_admin_action"
+                groups="engineer_group,tl_group,opr_group,zone_group,vertiv_admin_group">
+<!--                  groups="tl_group,opr_group,zone_group,vertiv_admin_group">-->
+        </menuitem>
+
+        <menuitem id="first_level_menu3"
+                  name="Activities" sequence="6">
+
+            <menuitem id="second_level_menu31"
+                      name="Team Calendar"
+                      groups="tl_group,opr_group,zone_group,vertiv_admin_group"
+                      action="engineer_calendar_action"/>
+
+            <menuitem id="second_level_menu32"
+                      name="My Calendar"
+                      action="calendar.action_calendar_event"/>
+
+            <menuitem id="second_level_menu33"
+                      groups="tl_group,opr_group,zone_group,vertiv_admin_group"
+                      name="My Territory"
+                      action="engineer_view_action"/>
+        </menuitem>
+
+        <menuitem id="first_level_menu4"
+                  name="Approvals"
+                  sequence="2"
+                  groups="tl_group,opr_group,zone_group,vertiv_admin_group,tl_group">
+
+            <menuitem id="second_level_menu41"
+                      action="cms_call_approval_action" groups="tl_group,opr_group,zone_group,vertiv_admin_group"
+                      name="Close Call"/>
+
+            <menuitem id="second_level_menu43"
+                      action="change_request_action" groups="opr_group,vertiv_admin_group,zone_group,tl_group"
+                      name="Call Type Change"/>
+
+            <menuitem id="second_level_menu44"
+                      action="engineer_approval" groups="opr_group,vertiv_admin_group,zone_group,tl_group"
+                      name="User Registration"/>
+        </menuitem>
+
+        <menuitem id="first_level_menu6" name="Parts"  groups="warehouse_group,vertiv_admin_group">
+            <menuitem id="fsm_model_menu_action61"
+                      groups="warehouse_group"
+                      action="material_order_action" name="Order Requested"/>
+            <menuitem id="fsm_model_menu_action62"
+                      groups="warehouse_group"
+                      action="material_process_action" name="Order in Processing"/>
+        </menuitem>
+
+        <menuitem id="first_level_menu7"
+                  name="Reports">
+
+            <menuitem id="fsm_model_menu_action70"
+                      name="Attendances"
+                      action="hr_attendance.hr_attendance_action"/>
+
+            <menuitem id="fsm_model_menu_action71"
+                      name="First Time Fix Summary"
+                      action="report_gen5" sequence="11"
+                      groups="opr_group,zone_group,vertiv_admin_group"/>
+
+            <!-- <menuitem id="time_sheet_action"
+                      name="Time sheet"
+                      action="timesheet_action" sequence="11"
+                      groups="opr_group,zone_group,vertiv_admin_group"/> -->
+
+<!--            Reference at metabase_firsttime_fix.xml-->
+
+            <!--            <menuitem id="fsm_model_menu_action751"-->
+            <!--                      name="Response Time/TAT "-->
+            <!--                      action="report_gens41"  sequence="30" groups="engineer_group,tl_group"/>-->
+
+            <!--            <menuitem id="fsm_model_menu_action752"-->
+            <!--                      name="Response Time/TAT "-->
+            <!--                      action="report_gen5x" sequence="30" -->
+            <!--                      groups="opr_group,zone_group,vertiv_admin_group"/>-->
+
+            <menuitem id="fsm_model_menu_action753"
+                      name="Response Time/TAT "
+                      action="report_gen51x" sequence="30"
+                      groups="engineer_group,tl_group"/>
+<!--            Refer call _report-->
+
+
+            <menuitem id="fsm_model_menu_action7533" name="Response Time/TAT "
+                      action="report_gen_new" sequence="30"
+                      groups="opr_group,zone_group,vertiv_admin_group"/>
+
+<!--            Refer metabase rs_tat-->
+
+            <menuitem id="fsm_model_menu_action761"
+                      name="Repeat Call Analysis "
+                      action="repeat_call_action" sequence="12"
+                      groups="opr_group,zone_group,vertiv_admin_group"/>
+<!--            Metabase repeat-->
+
+            <menuitem id="fsm_model_menu_action771"
+                      name="Repeat Call Analysis-Yearly "
+                      action="repeat_call_yearly" sequence="13"
+                      groups="opr_group,zone_group,vertiv_admin_group"/>
+            <!--            Metabase repeat-->
+            <!-- This Menu Item must have a parent and an action -->
+            <!--            <menuitem id="meta_report_menu" name="Rs tat meta" action="rs_meta_action" sequence="7"/>-->
+
+            <menuitem id="facetime_report" name="Equipment Facetime"
+                      action="facetime_report_act" sequence="15"
+                      groups="engineer_group,tl_group"/>
+            <!--   Facetime report for TL and Engineers-->
+
+            <menuitem id="facetime_report2" name="Equipment Facetime"
+                      action="facetime_zone_report_act" sequence="15"
+                      groups="opr_group,zone_group,vertiv_admin_group"/>
+    <!--   Facetime report for TL and Engineers-->
+
+            <menuitem id="fsm_model_menu_action72"
+                      name="Call Summary"
+                      action="report_gen" sequence="11"
+                      groups="opr_group,zone_group,vertiv_admin_group"/>
+ <!--   Metabase  for TL and Engineers-->
+
+            <menuitem id="fsm_model_menu_action74"
+                      name="Response Time /TAT Zonewise"
+                      action="report_gen3" sequence="30"
+                      groups="opr_group,zone_group,vertiv_admin_group"/>
+<!--            metabase rs_tat.xml-->
+
+            <!--            <menuitem id="fsm_model_menu_action734" name="Engineer Occupancy "-->
+            <!--                      action="engg_occupancy_action"-->
+            <!--                      groups="tl_group,engineer_group"-->
+            <!--                      sequence="5"/>-->
+
+            <!--            <menuitem id="fsm_model_menu_action743" name="Resolution Code"-->
+            <!--                      action="res_code_action"-->
+            <!--                      groups="opr_group"-->
+            <!--                      sequence="5"/>-->
+
+            <!--            <menuitem id="fsm_model_menu_action744" name="Resolution Code"-->
+            <!--                      action="res_zone_action"-->
+            <!--                      groups="vertiv_admin_group"-->
+            <!--                      sequence="5"/>-->
+            <!--             <menuitem id="second_level_86"-->
+            <!--                      name="Equipment facetime"-->
+            <!--                      action="equpment_facetime_action" sequence="10"-->
+            <!--                      groups="vertiv_admin_group"/>-->
+
+            <!--            <menuitem id="second_level_87"-->
+            <!--                      name="Equipment facetime"-->
+            <!--                      action="labour_timesheet" sequence="10"-->
+            <!--                      groups="vertiv_admin_group"/>-->
+
+        </menuitem>
+
+        <menuitem id="first_level_menu8"
+                  groups="vertiv_admin_group"
+                  name="Configuration">
+
+
+            <menuitem id="second_level_menu81"
+                      action="base.action_res_users"
+                      name="Users"/>
+
+            <menuitem id="second_level_menu82"
+                      action="sla_action"
+                      name="Product SLA Config"/>
+
+<!--            <menuitem id="second_level_menu83"-->
+<!--                      name="Lov Master"-->
+<!--                      action="lov_action" sequence="5"/>-->
+
+<!--            <menuitem id="second_level_menu84"-->
+<!--                      name="Parts Catalog"-->
+<!--                      action="parts_action" sequence="5"/>-->
+
+<!--            <menuitem id="second_level_85"-->
+<!--                      name="CMS Engineer"-->
+<!--                      action="cms_eng_action" sequence="10"-->
+<!--                      groups="vertiv_admin_group"/>-->
+
+            <!-- This Menu Item must have a parent and an action -->
+<!--            <menuitem id="fsm_setting_menu"-->
+<!--                      name="FSM Settings"-->
+<!--                      groups="vertiv_admin_group"-->
+<!--                      action="fsm_config" sequence="7"/>-->
+<!--            <menuitem id="second_level_86"-->
+<!--                      name="Ldap"-->
+<!--                      action="ldap_action" sequence="10"-->
+<!--                      groups="vertiv_admin_group"/>-->
+<!--            <menuitem id="second_level_87"-->
+<!--                      name="Branch "-->
+<!--                      action="branch_action" sequence="10"-->
+<!--                      groups="vertiv_admin_group"/>-->
+<!--            <menuitem id="second_level_88"-->
+<!--                      name="Notification-Log"-->
+<!--                      action="notification_act" sequence="10"-->
+<!--                      groups="vertiv_admin_group"/>-->
+
+            <menuitem id="second_level_wh_89"
+                      name="Warehouse"
+                      action="wh_mapping_action" sequence="10"
+                      groups="vertiv_admin_group,warehouse_group"/>
+        </menuitem>
+
+        <menuitem id="Firsl_level_9"
+                  name="Support"
+                  action="support_action" sequence="10"
+                  groups="technical_support,vertiv_admin_group"/>
+
+        <menuitem id="first_level_menu10"
+                  groups="engineer_group,opr_group,zone_group,vertiv_admin_group"
+                  name="Blog">
+            <menuitem id="Second_level_104"
+                      name="View Blog"
+                      action="blog_view_action" sequence="10"
+                      groups="engineer_group,tl_group,opr_group,zone_group"
+            />
+            <menuitem id="second_level_105"
+                      name="Post Blog"
+                      action="blog_edit_action" sequence="10"
+                      groups="vertiv_admin_group"/>
+
+        </menuitem>
+
+    </menuitem>
+
+</odoo>
+
+
+        <!--         <menuitem id="first_level_menu0" name="Dashboard" sequence="1">-->
+        <!--        <menuitem id="second_level_menu01" action="board.open_board_my_dash_action"/>-->
+        <!--        </menuitem>-->
+        <!--            <menuitem id="second_level_menu21" />-->
+        <!--              <menuitem id="fsm_model_menu_action18" name="Forward calls approval" action="material_info_action"/>-->
+
+        <!--                <menuitem id="fsm_model_menu_action9" name="Call close Approval" action="labour_info_action"/>-->
+
+
+        <!--            <menuitem id="fsm_model_menu_action12" name="View Blog" action="labour_info_action"/>-->
+        <!--            <menuitem id="fsm_model_menu_action13" name="Add Blog" action="material_info_action"/>-->
+        <!--            <menuitem id="fsm_model_menu_action10" action="product_info_model_action"-->
+        <!--                      name="Product SLA configuration"/>-->
+        <!--            <menuitem id="fsm_model_menu_action29" action="cms_report_model_pivot_status"-->
+
+        <!--            <menuitem id="fsm_model_menu_action731"-->
+        <!--                      name="Equipment FaceTime "-->
+        <!--                      action="report_gen21" sequence="20" groups="engineer_group"/>-->
+        <!--            <menuitem id="fsm_model_menu_action732"-->
+        <!--                      name="Equipment FaceTime "-->
+        <!--                      action="report_gen22" sequence="20" groups="tl_group"/>-->
+        <!--            <menuitem id="fsm_model_menu_action733"-->
+        <!--                      name="Equipment FaceTime "-->
+        <!--                      action="report_gen23" sequence="20" groups="opr_group,zone_group,vertiv_admin_group"/>-->
+        <!--           -->     <!--   <menuitem id="fsm_model_menu_action752"-->
+        <!--                      name="RT/TAT TL"-->
+        <!--                      action="report_gen41" sequence="20" groups="tl_group" />-->
+        <!--               <menuitem id="test_model_menu_action753"-->
+        <!--                      name="RT/TAT Central "-->
+        <!--                      action="report_gen42" sequence="40" groups="opr_group,zone_group,vertiv_admin_group" />-->
+
+
+        <!--              <menuitem id="facetime_report" name="Facetime report" parent="first_level_menu7" action="facetime_report_act" sequence="15"/>-->
+
+        <!--             <menuitem id="test_model_menu_action72"-->
+        <!--                      name="RT /TAT"-->
+        <!--                      action="cms_rt_tat_pivot_engg" sequence="11" groups="technical_support,vertiv_admin_group"/>-->
+        <!--       -->

@@ -1,0 +1,202 @@
+<odoo>
+    <record id="RT_view" model="ir.ui.view">
+    <field name="name">Response Time</field>
+    <field name="model">metabase.view</field>
+    <field name="arch" type="xml">
+        <form string="RT /TAT" write="false" create="false" edit="false">
+            <sheet>
+
+<!--          Zone Wise Data-->
+                <h1>
+                    Response Time and Turn Around Time - Zonewise
+                </h1>
+<!--                            <iframe-->
+<!--    src="https://reports.fsm.vertivco.com/public/dashboard/332ae7bb-6ab5-4091-83be-c82a560c46ab#titled=false     "-->
+<!--    frameborder="0"-->
+<!--   style="width:100%; height: calc(100vh - 180px);"-->
+<!--&gt;</iframe>-->
+
+                    <iframe src="https://reports.fsm.vertivco.com/public/dashboard/c23d7408-0910-465d-a1ff-b662fbf2f6c9#titled=false     " frameborder="0" style="width:100%; height: calc(100vh - 180px);"/>
+
+
+
+
+            </sheet>
+        </form>
+    </field>
+</record>
+
+     <record id="RT_view_new" model="ir.ui.view">
+    <field name="name">Response Time &amp; Turn Around Time</field>
+    <field name="model">metabase.view</field>
+    <field name="arch" type="xml">
+        <form string="RT /TAT" write="false" create="false" edit="false">
+            <sheet>
+        <h1>
+           Response Time &amp; Turn Around Time
+        </h1>
+<!--          Zone Wise Data-->
+
+                <!--          Zone Wise Data-->
+<iframe src="https://reports.fsm.vertivco.com/public/dashboard/2b75c70a-d9fd-4657-962c-b31007070102#titled=false" frameborder="0" style="width: 100%;height: calc(100vh - 180px);"/>
+
+
+<!--<iframe-->
+<!--    src="https://reports.fsm.vertivco.com/public/dashboard/c60fc5cb-f820-45d1-8842-663abff5962d#titled=false"-->
+<!--    frameborder="0"-->
+<!--   style="width:100%; height: calc(100vh - 180px);"-->
+
+<!--&gt;</iframe>-->
+
+
+
+            </sheet>
+        </form>
+    </field>
+</record>
+
+ <record id="report_gen_new" model="ir.actions.act_window">
+        <field name="name">RT/TAT</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">metabase.view</field>
+        <field name="view_mode">form</field>
+                <field name="target">inline</field>
+        <field name="view_id" ref="RT_view_new"/>
+              <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Report view
+          </p><p>
+            <!-- More details about what a user can do with this object will be OK -->
+          </p>
+        </field>
+    </record>
+
+
+            <record id="report_gen3" model="ir.actions.act_window">
+        <field name="name">RT/TAT</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">metabase.view</field>
+        <field name="view_mode">form</field>
+                <field name="target">inline</field>
+        <field name="view_id" ref="RT_view"/>
+              <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Report view
+          </p><p>
+            <!-- More details about what a user can do with this object will be OK -->
+          </p>
+        </field>
+    </record>
+
+<!--Response Time -->
+    <record id="RT_view3" model="ir.ui.view">
+    <field name="name">Response Time</field>
+    <field name="model">metabase.view</field>
+    <field name="arch" type="xml">
+        <form string="RT /TAT" write="false" create="false" edit="false">
+            <sheet>
+                <notebook>
+                         <page>
+                           <iframe
+    src="https://reports.fsm.vertivco.com/public/dashboard/7bbb5bd5-87f8-454f-aa6c-a60b1c4302d2#titled=false"
+    frameborder="0"
+     style="width:100%; height: calc(100vh - 170px);"
+></iframe>
+                         </page>
+                </notebook>
+
+            </sheet>
+        </form>
+    </field>
+</record>
+
+    <record id="RT_view31" model="ir.ui.view">
+    <field name="name">Response Time</field>
+    <field name="model">metabase.view</field>
+    <field name="arch" type="xml">
+        <form string="RT /TAT" write="false" create="false" edit="false">
+            <sheet>
+                <notebook>
+                         <page>
+                           <iframe
+    src="https://reports.fsm.vertivco.com/public/dashboard/7bbb5bd5-87f8-454f-aa6c-a60b1c4302d2#titled=false"
+    frameborder="0"
+    style="width:100%; height: calc(100vh - 170px);"
+></iframe>
+                         </page>
+                </notebook>
+
+            </sheet>
+        </form>
+    </field>
+</record>
+
+        <record id="RT_view32" model="ir.ui.view">
+    <field name="name">Response Time</field>
+    <field name="model">metabase.view</field>
+    <field name="arch" type="xml">
+        <form string="RT /TAT" write="false" create="false" edit="false">
+            <sheet>
+                <notebook>
+                         <page>
+                           <iframe
+    src="https://reports.fsm.vertivco.com/public/dashboard/7bbb5bd5-87f8-454f-aa6c-a60b1c4302d2#titled=false"
+    frameborder="0"
+     style="width:100%; height: calc(100vh - 170px);"
+></iframe>
+                         </page>
+                </notebook>
+
+            </sheet>
+        </form>
+    </field>
+</record>
+<!--            <record id="report_gen4" model="ir.actions.act_window">-->
+<!--        <field name="name">RT/TAT</field>-->
+<!--        <field name="type">ir.actions.act_window</field>-->
+<!--        <field name="res_model">cms.info.model</field>-->
+<!--        <field name="view_mode">form</field>-->
+<!--                <field name="target">inline</field>-->
+<!--        <field name="view_id" ref="RT_view3"/>-->
+<!--              <field name="help" type="html">-->
+<!--          <p class="oe_view_nocontent_create">-->
+<!--            Report view-->
+<!--          </p><p>-->
+<!--            &lt;!&ndash; More details about what a user can do with this object will be OK &ndash;&gt;-->
+<!--          </p>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <record id="report_gen41" model="ir.actions.act_window">
+        <field name="name">RT/TAT</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">metabase.view</field>
+        <field name="view_mode">form</field>
+                <field name="target">inline</field>
+        <field name="view_id" ref="RT_view31"/>
+              <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Report view
+          </p><p>
+            <!-- More details about what a user can do with this object will be OK -->
+          </p>
+        </field>
+    </record>
+
+      <record id="report_gen42" model="ir.actions.act_window">
+        <field name="name">RT/TAT</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">metabase.view</field>
+        <field name="view_mode">form</field>
+                <field name="target">inline</field>
+        <field name="view_id" ref="RT_view32"/>
+              <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Report view
+          </p><p>
+            <!-- More details about what a user can do with this object will be OK -->
+          </p>
+        </field>
+    </record>
+
+</odoo>

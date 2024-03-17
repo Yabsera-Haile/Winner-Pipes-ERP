@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+     <template id="menuclick" name="menuclickjs assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/Vertiv/static/src/js/menuclick.js"></script>
+            <script type="text/javascript" src="/Vertiv/static/src/js/map.js"></script>
+            <script type="text/javascript" src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js"></script>
+<!--            <link rel="stylesheet" type="text/css" href="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css"></link>-->
+<!--            <link rel="stylesheet" type="text/css" href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css"></link>-->
+        </xpath>
+    </template>
+</odoo>

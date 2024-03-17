@@ -1,0 +1,341 @@
+<odoo>
+
+
+<record id="cms_engineer_tree" model="ir.ui.view">
+    <field name="name">CMS Employee List</field>
+    <field name="model">cms.employee</field>
+    <field name="arch" type="xml">
+        <tree string="Employee list">
+             <field name="employee_code"/>
+                          <field name="employee_name"/>
+                          <field name="email"/>
+                          <field name="mob_no"/>
+        </tree>
+    </field>
+</record>
+
+
+    <record id="cms_engineer_view" model="ir.ui.view">
+        <field name="name">CMS Employee FORM</field>
+        <field name="model">cms.employee</field>
+        <field name="arch" type="xml">
+            <form string="CMS Employee list">
+                <sheet>
+                    <group>
+                              <field name="employee_code"/>
+                          <field name="employee_name"/>
+                          <field name="email"/>
+                          <field name="mob_no"/>
+
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="cms_eng_tree" model="ir.ui.view">
+        <field name="name">CMS Engineer Tree</field>
+        <field name="model">cms.employee</field>
+        <field name="arch" type="xml">
+            <tree string="CMS Tree">
+                <field name="employee_code"/>
+                 <field name="employee_name"/> <field name="designation"/>
+                 <field name="sr_group"/>
+                 <field name="email"/>
+                 <field name="mob_no"/>
+
+                </tree>
+        </field>
+    </record>
+
+     <record id="ldap_tree" model="ir.ui.view">
+        <field name="name">Ldap Tree</field>
+        <field name="model">ldap</field>
+        <field name="arch" type="xml">
+            <tree string="CMS Tree">
+                <field name="ADDisplayName"/>
+                 <field name="ADUserid"/>
+                <field name="ADEmailid"/>
+                 <field name="ADMobileNumber"/>
+                 <field name="ADOrganizationName"/>
+                 <field name="ADMgrDisplayName"/>
+                 <field name="ADMgrEmailid"/>
+                 <field name="ADLocation"/>
+                 <field name="ADTitle"/>
+                 <field name="ADDepartment"/>
+                 <field name="ADFirstName"/>
+                 <field name="ADLastName"/>
+
+
+                </tree>
+        </field>
+    </record>
+
+
+    <record id="cms_eng_action" model="ir.actions.act_window">
+        <field name="name">CMS Engineer Action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cms.employee</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            <!-- Add Text Here -->
+          </p><p>
+            <!-- More details about what a user can do with this object will be OK -->
+          </p>
+        </field>
+    </record>
+
+     <record id="branch_info_form" model="ir.ui.view">
+        <field name="name">branch.info.form</field>
+        <field name="model">branch.info</field>
+        <field name="arch" type="xml">
+            <form string="Branch Info">
+                <sheet>
+                    <group>
+                        <field name="branch_name"/>
+                        <field name="branch_id"/>
+                        <field name="branch_description"/>
+                        <field name="branch_isactive"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="branch_info_list" model="ir.ui.view">
+        <field name="name">branch.info.tree</field>
+        <field name="model">branch.info</field>
+        <field name="arch" type="xml">
+            <tree string="Brnach Info">
+                <field name="branch_name"/>
+                <field name="branch_id"/>
+                <field name="branch_description"/>
+            </tree>
+        </field>
+    </record>
+
+
+<record id="branch_action" model="ir.actions.act_window">
+    <field name="name">Branch View</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">branch.info</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+      <p class="oe_view_nocontent_create">
+        <!-- Add Text Here -->
+      </p><p>
+        <!-- More details about what a user can do with this object will be OK -->
+      </p>
+    </field>
+</record>
+     <record id="ldap_action" model="ir.actions.act_window">
+        <field name="name">Ldap Tree</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ldap</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            <!-- Add Text Here -->
+          </p><p>
+            <!-- More details about what a user can do with this object will be OK -->
+          </p>
+        </field>
+    </record>
+
+    <record id="employee_form" model="ir.ui.view">
+        <field name="model">hr.employee</field>
+         <field name="groups_id" eval="[(4, ref('opr_group')),(4, ref('vertiv_admin_group'))]"/>
+        <!--        <field name="inherit_id" ref="hr.view_employee_form"/>-->
+        <field name="arch" type="xml">
+
+            <form delete='false' duplicate="false" create="false">
+
+
+                <sheet>
+
+                    <!--                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger"-->
+                    <!--                            attrs="{'invisible': [('active', '=', True)]}"/>-->
+                    <field name="image_1920" widget='image' class="oe_avatar"
+                           options='{"zoom": true, "preview_image":"image_128"}' invisible="1"/>
+<!--                     <field name="avatar_image_new" widget='image' class="oe_avatar" readonly="0"-->
+<!--                           options='{"zoom": true, "preview_image":"avatar_image_new"}' invisible="1"/>-->
+                    <field name="user_avatar_image_url" widget="image_url" class="oe_image_small" width="100px" height="100px" style="float:right;" readonly="0"/>
+                    <div class="oe_title">
+                        <h1 class="d-flex">
+                        <field name="name" placeholder="Employee's Name" required="True"/>
+                    </h1>
+                    <h2>
+                        <field name="job_title" placeholder="Job Position"/>
+                    </h2>
+                    </div>
+                    <group>
+                        <group>
+
+                            <field name="mobile_phone" readonly="0" widget="phone"/>
+<!--                            <field name="work_phone" readonly="1" widget="phone"/>-->
+                            <field name="work_email" readonly="1" widget="email"
+                                   options="{'no_create_edit': True,'no_open': True,}"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="department_id"/>
+                            <field name="parent_id" string="Territory Manager" options="{'no_create_edit': True,'no_open': True,}"/>
+                            <field name="role" readonly="1" class="oe_inline"/>
+                                <button name="change_role" type="object" string="Change" class="oe_inline; btn-primary"    />
+                            <field name="product_group"/>
+                            <field name="branch_id"/>
+                            <field name="employee_city"/>
+                             <field name="employee_state"/>
+                            <field name="wh_state" groups="Vertiv.vertiv_admin_group,Vertiv.warehouse_group"/>
+                        </group>
+                        <group string="Login Settings" name="active_group">
+                                        <field name="user_id" string="Related User" domain="[('share', '=', False)]" options="{'no_create_edit': True,'no_open': True,}"/>
+                                    </group>
+                             <group>
+                            <field name="is_approved"/>
+<!--                            <field name="approvedby"/>-->
+<!--                            <field name="approveddate"/>-->
+
+                        </group>
+                    </group>
+<!--                    <group name="managers" position="attributes">-->
+<!--                        <attribute name='invisible'>1</attribute>-->
+<!--                    </group>-->
+<!--                    &lt;!&ndash;                <page name="personal_information" position="attributes">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    <attribute name='invisible'>1</attribute>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                </page>&ndash;&gt;-->
+<!--                    <group name="identification_group" position="attributes">-->
+<!--                        <attribute name='invisible'>1</attribute>-->
+<!--                    </group>-->
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="employee_tree" model="ir.ui.view">
+        <field name="name">employee.tree</field>
+        <field name="model">hr.employee</field>
+        <field name="arch" type="xml">
+            <tree string="Employees" multi_edit="1" sample="1">
+                <field name="name" readonly="1"/>
+<!--                <field name="work_phone" class="o_force_ltr" readonly="1"/>-->
+                <field name="work_email"/>
+                <field name="company_id" groups="base.group_multi_company" readonly="1"/>
+                <field name="department_id"/>
+                <field name="role"/>
+                <field name="parent_id"/>
+<!--                <field name="opmgr" string="Operation manager"/>-->
+                <field name="work_location" optional="hide"/>
+                <field name="coach_id" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+
+
+    <record model="ir.actions.act_window" id="engineer_view_action">
+        <field name="name">Employee Details</field>
+        <field name="res_model">hr.employee</field>
+        <field name="view_mode">tree,form</field>
+
+    </record>
+<record model="ir.actions.act_window.view" id="employee_tree_action">
+         <field name="act_window_id" ref="engineer_view_action"/>
+         <field name="view_id" ref="employee_tree"/>
+        <field name="view_mode">tree</field>
+        <field name="sequence" eval="2" />
+     </record>
+
+    <record model="ir.actions.act_window.view" id="employee_form_action">
+         <field name="act_window_id" ref="engineer_view_action"/>
+         <field name="view_id" ref="employee_form"/>
+        <field name="view_mode">form</field>
+        <field name="sequence" eval="2" />
+     </record>
+
+        <record id="my_employee_list" model="ir.actions.act_window">
+        <field name="name">Employees</field>
+        <field name="res_model">hr.employee</field>
+        <field name="view_mode">kanban,tree,form,activity</field>
+        <field name="domain">[]</field>
+        <field name="context">{'chat_icon': True}</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a new employee
+            </p>
+            <p>
+                With just a quick glance on the employee screen, you
+                can easily find all the information you need for each person;
+                contact data, job position, availability, etc.
+            </p>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_inherit_employee">
+        <field name="name">Employee.form</field>
+        <field name="res_model">hr.employee</field>
+        <field name="view_mode">form,tree</field>
+    </record>
+
+    <!-- Inherit Form View to Modify it -->
+    <record id="view_territory_form" model="ir.ui.view">
+        <field name="name">Territory form</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='name']" position="replace">
+                <!-- Add your fields or attributes here -->
+                  <field name="name" string="Territory"/>
+
+            </xpath>
+             <xpath expr="//field[@name='parent_id']" position="replace">
+                <!-- Add your fields or attributes here -->
+
+                   <field name="parent_id" string="Parent Territory"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="hr_change_role" model="ir.ui.view">
+        <field name="name">change engineer role</field>
+        <field name="model">hr.role.change</field>
+        <field name="arch" type="xml">
+            <form string="Change Role">
+                <sheet>
+                    <group>
+                        <field name="role"/>
+
+                    </group>
+                </sheet>
+                <footer>
+                      <button name="change_role" type="object" string="Approve" class="btn-primary"  />
+                      <button string="Cancel" special="cancel" />
+                </footer>
+
+            </form>
+        </field>
+    </record>
+
+    <record id="view_users_form_inherit" model="ir.ui.view">
+            <field name="name">res.users.form.inherit1</field>
+            <field name="model">res.users</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='image_1920']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//div[hasclass('oe_title')]" position="before">
+                    <field name="user_avatar_image_url" widget="image_url" class="oe_image_small" width="100px" height="100px" style="float:right;" readonly="0"/>
+                </xpath>
+            </field>
+        </record>
+
+
+
+</odoo>

@@ -1,0 +1,203 @@
+<odoo>
+
+
+    <record id="order_form" model="ir.ui.view">
+        <field name="name">Order Form</field>
+        <field name="model">call.material.orders</field>
+        <field name="arch" type="xml">
+            <form string="Order Form" create="false" edit="true">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="call_id" string="Call No" readonly="1"/>
+                        </h1>
+                    </div>
+
+
+
+
+                        <div class="row mt32 mb32">
+
+
+                            <div class="col-2">
+                                <strong>Order Number</strong>
+                                <br>
+                                </br>
+                                <field name="order_number" string="Order Number"
+                                       readonly="1"/>
+                            </div>
+                            <div class="col-2">
+                                <strong>Order Date</strong>
+                                <br>
+                                </br>
+                                <field name="order_date" string="Order Date"
+                                      readonly="1"/>
+                            </div>
+                            <div class="col-2">
+                                <strong>Engineer</strong>
+                                <br>
+                                </br>
+                                <field name="call_engineer" string="Engineer"
+                                      readonly="1"/>
+                            </div>
+                            <div class="col-2">
+                                <strong>State</strong>
+                                <br>
+                                </br>
+                                <field name="call_state"/>
+                            </div>
+                            <div class="col-2">
+                                <strong>Shipped Date</strong>
+                                <br></br>
+                                <field name="shipped_date" widget="date"
+                                       attrs="{'invisible':['!',('order_status','==','Picked')],'required':[('order_status','==','Picked')]}"/>
+
+                            </div>
+                            <div class="col-2">
+                                <h3>
+                                      <strong>Order Status</strong>
+                                <br>
+                                </br>
+                                <field name="order_status" readonly="1"/>
+
+                                </h3>
+
+                            </div>
+                        </div>
+                      <group>
+                            <group name="group_left" string="Customer Details">
+                            <field name="customer_details" nolabel="1"/>
+<!--                                <field name="call_status" nolabel="1"/>-->
+
+                        </group>
+                        <group name="group_right" string="Shipping Details">
+                            <field name="shipping_address" nolabel="1"/>
+
+                        </group>
+                    </group>
+                    <div class="row mt32 mb32">
+                         <div class="col-6">
+                             <h4>
+                                <strong>Warehouse</strong>
+                               <br></br>
+
+                            <field name="warehouse_id"
+                                    attrs="{'readonly':[('order_status','!=','Requested')]}"
+                                   options="{'limit': 10, 'create': false, 'no_create_edit': True}"/>
+                             </h4>
+
+                        </div>
+                          <div class="col-6">
+                                <strong>Notes</strong>
+                                <br></br>
+                                <field name="notes"/>
+                            </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+                            <div class="row mt32 mb32">
+                                <table class="table table-lg ">
+                                    <thead>
+                                        <tr>
+                                            <th width="20%">Item Number
+                                            </th>
+                                            <th width="60%">Description
+                                            </th>
+                                            <th width="20%" >Qty
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="invoice_tbody">
+                                        <tr>
+                                            <td width="20%">
+                                                <field name="item_number" string="Item No"
+                                                    readonly="1"/>
+                                            </td>
+                                            <td width="60%">
+                                                <field name="item_desc" string="Description"
+                                                      readonly="1"/>
+                                            </td>
+                                            <td  width="20%">
+                                                <field name="qty" string="Qty"
+                                                      readonly="1"/>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
+
+                        <group>
+
+
+                            <button name="acknowledge_order" string="Acknowledge" type="object" class="oe_highlight"
+                                    confirm="Acknowledge Order?"
+                                    attrs="{'invisible':['!',('order_status','==','Requested')]}"/>
+                            <button name="picked_order" string="Picked" type="object" class="oe_highlight"
+                                    attrs="{'invisible':['!',('order_status','==','Acknowledged')]}"/>
+                            <button name="shipped_order" string="Shipped" type="object" class="oe_highlight"
+                                    attrs="{'invisible':['!',('order_status','==','Picked')]}"/>
+                            <field name="received_date" widget="date"
+                                   attrs="{'invisible':['!',('order_status','==','Received')],'required':[('order_status','==','Received')]}"/>
+
+<!--                            <button name="received_order" string="Received" type="object" class="oe_highlight"-->
+<!--                                    confirm="Received Order?"-->
+<!--                                    attrs="{'invisible':['!',('order_status','==','Shipped')]}"/>-->
+                            <!-- <button name="buttonClickEvent2" string="Reject" type="object" class="oe_highlight"-->
+                            <!--                    confirm="Reject Call Type Change?"  attrs="{'invisible':[('approved_by','!=',False)]}"/>-->
+
+                            <field name="wh_contact" invisible="1"/>
+                            <field name="wh_state" invisible="1"/>
+                        </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="order_tree" model="ir.ui.view">
+        <field name="name">Order List</field>
+        <field name="model">call.material.orders</field>
+        <field name="arch" type="xml">
+            <tree string="Order list" create="false" edit="false">
+                <!--             <field name="order_number"/>-->
+                <field name="call_no"/>
+                <field name="order_date"/>
+                <field name="order_status"/>
+                <field name="shipped_date"/>
+                <field name="call_state"/>
+
+                <field name="warehouse_id" options="{'limit': 10, 'create': false, 'create_edit': false}"/>
+                <field name="item_number"/>
+                <field name="item_desc"/>
+                <field name="qty"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="material_order_action">
+        <field name="name">Material order</field>
+        <field name="res_model">call.material.orders</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">['&amp;',('order_status','=','Requested'),('call_id.call_status','!=','Closed')]</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="material_process_action">
+        <field name="name">Material order</field>
+        <field name="res_model">call.material.orders</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">['&amp;',('order_status','!=','Requested'),('call_id.call_status','!=','Closed')]</field>
+    </record>
+</odoo>

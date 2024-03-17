@@ -1,0 +1,57 @@
+<odoo>
+    <!-- Inherit Form View to Modify it -->
+    <record id="res_config_fsm" model="ir.ui.view">
+        <field name="name">res.config.settings</field>
+        <field name="priority" eval="5"/>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <!-- Add your fields or attributes here -->
+                <div class="app_settings_block" data-string="FSM" data-key="MY FSM">
+                    <h2>FIELD SERVICE APP</h2>
+                    <div class="row mt16  o_settings_container">
+                        <div id="FSM">
+
+
+                            <label for="HTML"/>
+                            <div class="o_setting_right_pane">
+                                <div class="text-muted">
+                                    Collab HTML
+                                    Format https://xxx.xxx.xxx
+                                </div>
+                            </div>
+                            <div>
+                                <field name="HTML"/>
+                            </div>
+
+                          </div>
+                    </div>
+                </div>
+            </xpath>
+
+        </field>
+    </record>
+    <record id="fsm_config" model="ir.actions.act_window">
+        <field name="name">settinss</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+    <field name="view_id" ref="res_config_fsm" />
+    <field name="target">inline</field>
+    <field name="context">{'module':'Vertiv'}</field>
+
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            <!-- Add Text Here -->
+          </p>
+            <p>
+            Add URL/TOKEN HERE
+            <!-- More details about what a user can do with this object will be OK -->
+          </p>
+        </field>
+    </record>
+
+
+</odoo>

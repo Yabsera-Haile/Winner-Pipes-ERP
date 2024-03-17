@@ -1,0 +1,107 @@
+<odoo>
+
+
+    <record id="support_tree" model="ir.ui.view">
+        <field name="name">Technical Support</field>
+        <field name="model">cms.info.model</field>
+         <field name="groups_id" eval="[(4, ref('technical_support'))]"/>
+        <field name="arch" type="xml">
+            <tree string="Support Calls" create="false" edit="false">
+                <field name="call_no" string="Call No"/>
+                <field name="call_type" string="Type"/>
+                <field name="call_sla" string="Type" invisible="1" decoration-bf="1"/>
+                <field name="fault_reported" string="Fault reported"/>
+                <field name="call_log_date" widget="date" string="Log Date"/>
+                <field name="sr_group" string="SR Group"/>
+                <field name="sr_owner" string="SR Owner"/>
+                <field name="zone" string="Zone"/>
+                <field name="engineerId" string="Engineer"/>
+                <field name="teamlead" string="Team Lead"/>
+                <field name="call_status" string="Status"/>
+
+            </tree>
+        </field>
+    </record>
+
+
+
+    <record id="support_form" model="ir.ui.view">
+        <field name="name">Technical Support</field>
+        <field name="model">cms.info.model</field>
+         <field name="groups_id" eval="[(4, ref('technical_support'))]"/>
+        <field name="arch" type="xml">
+            <form string="Technical Support" create="false" edit="false">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                              <field name="call_no" width="50" readonly="0"/>
+                        </h1>
+                    </div>
+                    <group name="group_left" string="Call Details" readonly="0">
+                        <field name="call_status" string="Call Status" width="50"/>
+                        <field name="call_type" string="Call Type" width="40" readonly="0"/>
+                        <field name="fault_reported" string="Fault Reported" width="40" readonly="0"/>
+                        <field name="call_log_date" string="Call Log Date" width="40" widget="datetime"/>
+                        <field name="engineerId" string="Engineer" width="60"/>
+                        <field name="enpi_eng_id" invisible="1" string="Engineer CMS" width="60"/>
+
+              </group>
+                    <notebook>
+                        <page string="Support">
+                            <field name="support_iframe"/>
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="support_action" model="ir.actions.act_window">
+        <field name="name">Technical Support</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cms.info.model</field>
+        <field name="view_mode">tree,form</field>
+
+        <field name="domain">[('call_status', '!=', 'Completed')]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+            </p>
+            <p>
+                <!-- More details about what a user can do with this object will be OK -->
+            </p>
+        </field>
+    </record>
+     <!-- Inherit Form View to Modify it -->
+    <record id="support_form_a" model="ir.ui.view">
+    <field name="name">Technical Support</field>
+        <field name="model">cms.info.model</field>
+
+          <field name="groups_id" eval="[(6, 0, [ref('engineer_group')]),(6, 0, [ref('tl_group')])]"/>
+            <field name="inherit_id" ref="support_form"/>
+    <field name="arch" type="xml">
+   <xpath expr="//page" position="replace">
+
+          </xpath>
+
+
+
+
+
+        </field>
+    </record>
+    <record model="ir.actions.act_window.view" id="support_form_action">
+        <field name="act_window_id" ref="support_action"/>
+        <field name="view_id" ref="support_form_a"/>
+        <field name="view_mode">form</field>
+        <field name="sequence" eval="3"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="support_tree_action">
+        <field name="act_window_id" ref="support_action"/>
+        <field name="view_id" ref="support_tree"/>
+        <field name="view_mode">tree</field>
+        <field name="sequence" eval="1"/>
+    </record>
+
+</odoo>

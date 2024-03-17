@@ -1,0 +1,169 @@
+<odoo>
+<!--           <record model="ir.actions.act_window" id="employee_approval_action">-->
+<!--        <field name="name">Employee Approval</field>-->
+<!--        <field name="res_model">hr.employee</field>-->
+<!--        <field name="view_mode">tree,form</field>-->
+
+<!--    </record>-->
+<!-- <record model="ir.actions.act_window.view" id="employee_approval_tree_actions">-->
+<!--         <field name="act_window_id" ref="employee_approval_action"/>-->
+<!--         <field name="view_id" ref="employee_approval_tree"/>-->
+<!--        <field name="view_mode">tree</field>-->
+<!--        <field name="sequence" eval="5" />-->
+<!--     </record>-->
+<!-- <record model="ir.actions.act_window.view" id="employee_approval_form_action">-->
+<!--         <field name="act_window_id" ref="employee_approval_action"/>-->
+<!--         <field name="view_id" ref="employee_form"/>-->
+<!--        <field name="view_mode">form</field>-->
+<!--        <field name="sequence" eval="5" />-->
+<!--     </record>-->
+
+
+
+<!--        <record id="employee_approval_tree" model="ir.ui.view">-->
+<!--        <field name="name">employee.approval.tree</field>-->
+<!--        <field name="model">hr.employee</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree string="Employees" multi_edit="1" sample="1">-->
+<!--                <field name="name" readonly="1"/>-->
+<!--                <field name="work_phone" class="o_force_ltr" readonly="1"/>-->
+<!--                <field name="work_email"/>-->
+<!--                <field name="company_id" groups="base.group_multi_company" readonly="1"/>-->
+<!--                <field name="department_id"/>-->
+<!--                <field name="job_id"/>-->
+<!--                <field name="parent_id"/>-->
+<!--                <field name="work_location" optional="hide"/>-->
+
+<!--                <field name="coach_id" invisible="1"/>-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+
+
+<!--     <record id="my_employee_list" model="ir.actions.act_window">-->
+<!--        <field name="name">Employees</field>-->
+<!--        <field name="res_model">hr.employee</field>-->
+<!--        <field name="view_mode">kanban,tree,form,activity</field>-->
+<!--        <field name="domain">[]</field>-->
+<!--        <field name="context">{'chat_icon': True}</field>-->
+<!--        <field name="view_id" eval="False"/>-->
+<!--        <field name="help" type="html">-->
+<!--            <p class="o_view_nocontent_smiling_face">-->
+<!--                Add a new employee-->
+<!--            </p>-->
+<!--            <p>-->
+<!--                With just a quick glance on the Vertiv employee screen, you-->
+<!--                can easily find all the information you need for each person;-->
+<!--                contact data, job position, availability, etc.-->
+<!--            </p>-->
+<!--        </field>-->
+<!--     </record>-->
+<!--    <record model="ir.actions.act_window" id="action_inherit_employee">-->
+<!--        <field name="name">Employee.form</field>-->
+<!--        <field name="res_model">hr.employee</field>-->
+<!--        <field name="view_mode">form,tree</field>-->
+<!--    </record>-->
+
+    <record id="userapproval_search" model="ir.ui.view">
+        <field name="name">Approval Search</field>
+        <field name="model">user.approval</field>
+        <field name="arch" type="xml">
+            <search string="Search">
+                <field name="name"/>
+                 <field name="title"/>
+                <field name="email"/>
+                <field name="manager"/>
+                <field name="role"/>
+                <field name="mobile"/>
+                <filter string="Approved" name="group_by_approval" context="{'group_by': 'is_approved'}"/>
+                <filter string="Manager" name="group_by_manager" context="{'group_by': 'manager'}"/>
+                <filter string="Approved date" name="group_by_date" context="{'group_by': 'write_date'}"/>
+                <filter string="Role" name="group_by_role" context="{'group_by': 'role'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="user_approval_tree" model="ir.ui.view">
+        <field name="name">User Registration Approval</field>
+        <field name="model">user.approval</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="name"/>
+                <field name="email"/>
+                <field name="title"/>
+                <field name="password" invisible="1"/>
+                <field name="mobile" readonly="1"/>
+                        <field name="role" readonly="1"/>
+                        <field name="manager" readonly="1"/>
+                        <field name="product_group" readonly="1"/>
+                        <field name="city" readonly="1"/>
+                        <field name="state" readonly="1"/>
+                        <field name="branch" readonly="1"/>
+                <field name="is_approved" invisible="0" readonly="1"/>
+                <field name="is_profile_updated" invisible="1" readonly="1"/>
+
+                <button name="buttonClickEvent" string="Approve" type="object" class="oe_highlight"
+                        attrs="{'invisible':['|',('is_profile_updated','=',False),('is_approved','=',True)]}"/>
+
+            </tree>
+        </field>
+    </record>
+    <record id="user_approval_form" model="ir.ui.view">
+        <field name="name">User Registration Approval</field>
+        <field name="model">user.approval</field>
+        <field name="arch" type="xml">
+            <form string="User approval">
+                <sheet>
+                    <group>
+
+                        <field name="name"/>
+                        <field name="email"/>
+                        <field name="title"/>
+
+                        <field name="mobile" readonly="1" attrs="{'invisible':[('manager','=',False)]}"/>
+                        <field name="role" readonly="1" attrs="{'invisible':[('manager','=',False)]}"/>
+                        <button name="change_role" type="object" string="Change Role" class="btn-primary"  attrs="{'readonly':['|',('is_profile_updated','=',False),('is_approved','=',True)]}"  />
+                        <field name="manager" readonly="1"/>
+                        <field name="product_group" readonly="1" attrs="{'invisible':[('manager','=',False)]}"/>
+                        <field name="city" readonly="1" attrs="{'invisible':[('manager','=',False)]}"/>
+                        <field name="state" readonly="1" attrs="{'invisible':[('manager','=',False)]}"/>
+                        <field name="branch" readonly="1" attrs="{'invisible':[('manager','=',False)]}"/>
+
+
+
+                        <field name="is_approved" readonly="1"/>
+
+                        <field name="verification_code" readonly="1" invisible="1"/>
+                        <field name="is_profile_updated" readonly="1"/>
+                          <field name="password" invisible="1"/>
+                        <field name="is_verified" invisible="1" readonly="1"/>
+                           <field name="approvedby" invisible="1" readonly="1"/>
+                        <field name="approveddate" invisible="1" readonly="1"/>
+                        <button name="buttonClickEvent" string="Approve" type="object" class="oe_highlight"
+                                attrs="{'invisible':['|',('is_profile_updated','=',False),('is_approved','=',True)]}"/>
+                        <button name="ResetProfile" string="Reset Profile" type="object" class="oe_highlight"
+                                attrs="{'invisible':['|',('is_profile_updated','=',False),('is_approved','=',True)]}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="engineer_approval" model="ir.actions.act_window">
+        <field name="name">User Regisration</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">user.approval</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            <!-- Add Text Here -->
+          </p><p>
+            <!-- More details about what a user can do with this object will be OK -->
+          </p>
+        </field>
+    </record>
+
+
+</odoo>

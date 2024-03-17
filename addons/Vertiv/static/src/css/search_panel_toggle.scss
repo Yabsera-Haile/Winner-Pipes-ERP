@@ -1,0 +1,60 @@
+.o_controller_with_searchpanel {
+	.btn-search-panel-toggle {
+		width: 6px;
+		height: 100px;
+		border-width: 0 ;
+		display: flex;
+		align-items: center;
+		z-index: 10;
+		outline: none;
+		margin-top: calc(20% - 60px);
+		color: #23d0b0;
+		padding:0;
+	}
+	.hide-panel::before {
+		color: #666666;
+		margin-left: -8px;
+	}
+	.show-panel::before {
+		color: #666666;
+		margin-left: 5px;
+	}	
+	.hide-panel {
+		background:#666666;
+		margin-left: -4px;
+		border-top-left-radius:6px;
+		border-bottom-left-radius:6px;
+	}
+	.show-panel {
+		background: #666666;
+		margin-left: 0px;
+		border-top-right-radius:6px;
+		border-bottom-right-radius:6px;
+	}
+	.o_search_panel {
+		border: 1px solid #ffffff;
+		border-radius: 6px;
+	}
+	
+}
+
+.o_list_table th:last-child:after {
+    content: "Action";
+}
+.o_list_view .o_list_table thead > tr > th:not(.o_list_record_selector).o_list_number_th {
+    text-align: center !important;
+}
+
+.o_list_view .o_list_table tbody > tr > td:not(.o_list_record_selector).o_list_number {
+    text-align: center !important;
+}
+
+.o_list_table thead{
+	position: sticky;
+	top: 0;
+}
+
+div[name='call_workbench_observation_ids'] .o_list_view .table-responsive table thead th, div[name='call_workbench_action_taken_ids'] .o_list_view .table-responsive table thead th,
+div[name='call_workbench_recomendatio_ids'] .o_list_view .table-responsive table thead th, {
+	width:30% !important;
+}

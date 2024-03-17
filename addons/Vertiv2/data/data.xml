@@ -1,0 +1,51 @@
+<odoo>
+    <record id="base.main_company" model="res.company">
+    <field name="name">Vertiv India Energy P Ltd</field>
+    <field name="currency_id" ref="base.INR"/>
+</record>
+
+
+    <record id="ir_cron_generate_report" model="ir.cron">
+        <field name="name">Generate Report every 15 minit </field>
+        <field name="interval_number">15</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <field name="model_id" ref="model_cms_info_model"/>
+        <field name="doall" eval="False"/>
+        <field name="state">code</field>
+        <field name="code">model.process_generate_report_record()</field>
+    </record>
+
+
+    <record id="ir_cron_part_order_state" model="ir.cron">
+        <field name="name">Part order state every 24 hours</field>
+        <field name="interval_number">24</field>
+        <field name="interval_type">hours</field>
+        <field name="numbercall">-1</field>
+        <field name="model_id" ref="model_call_material_orders"/>
+        <field name="doall" eval="False"/>
+        <field name="state">code</field>
+        <field name="code">model.part_order_state_cron()</field>
+    </record>
+
+    <!-- <record id="automated_action_for_change_call_for_rejected" model="base.automation">
+        <field name="name">Rejected Call Push Notifiction</field>
+        <field name="model_id" ref="Vertiv.model_cms_info_model"/>
+        <field name="state">code</field>
+        <field name="trigger">on_write</field>
+        <field name="trigger_field_ids" eval="[(4,ref('Vertiv.field_cms_info_model__call_status')),(4,ref('Vertiv.field_cms_info_model__engineerId'))]"/>
+        <field name="activity_summary">Create Automated Action For Push Notification On Call Rejected</field>
+        <field name="code">model.rejected_call_notification_automated_action()</field>
+    </record>
+
+    <record id="automated_action_for_change_call_for_forwading" model="base.automation">
+        <field name="name">Forward Call Push Notifiction</field>
+        <field name="model_id" ref="Vertiv.model_cms_info_model"/>
+        <field name="state">code</field>
+        <field name="trigger">on_write</field>
+        <field name="trigger_field_ids" eval="[(4,ref('Vertiv.field_cms_info_model__call_status')),(4,ref('Vertiv.field_cms_info_model__engineerId'))]"/>
+        <field name="activity_summary">Create Automated Action For Push Notification On Call Forwarding</field>
+        <field name="code">model.forwarding_call_notification_automated_action()</field>
+    </record> -->
+
+</odoo>

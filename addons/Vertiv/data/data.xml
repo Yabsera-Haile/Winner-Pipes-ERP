@@ -1,0 +1,31 @@
+<odoo>
+    <record id="base.main_company" model="res.company">
+    <field name="name">Vertiv India Energy P Ltd</field>
+    <field name="currency_id" ref="base.INR"/>
+</record>
+
+
+    <record id="ir_cron_generate_report" model="ir.cron">
+        <field name="name">Generate Report every 15 minit </field>
+        <field name="interval_number">15</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <field name="model_id" ref="model_cms_info_model"/>
+        <field name="doall" eval="False"/>
+        <field name="state">code</field>
+        <field name="code">model.process_generate_report_record()</field>
+    </record>
+
+
+    <record id="ir_cron_part_order_state" model="ir.cron">
+        <field name="name">Part order state every 24 hours</field>
+        <field name="interval_number">24</field>
+        <field name="interval_type">hours</field>
+        <field name="numbercall">-1</field>
+        <field name="model_id" ref="model_call_material_orders"/>
+        <field name="doall" eval="False"/>
+        <field name="state">code</field>
+        <field name="code">model.part_order_state_cron()</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,185 @@
+// Custom CSS starts
+
+<Odoo directory>server\odoo\addons\web\static\src\scss\bootstrap_review.scss
+//Contents for font face , color, logo,banner
+
+
+@font-face {
+    font-family: 'calibre';
+    src: url('Calibre-Regular.woff2') format('woff2'),
+        url('Calibre-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+body {
+    font-family: calibre !important;
+    font-size: 14px;
+}
+.btn-primary {
+    background: #fe5b1b;
+    border-color: #fe5b1b;
+}
+.o_main_navbar > ul > li > a:hover, .o_main_navbar > ul > li > label:hover, .o_main_navbar .show .dropdown-toggle {
+    background-color: #fe5b1b;
+}
+.o_main_navbar {
+    background: #333333;
+    border-bottom: 1px solid #333333;
+}
+body, .table {
+    color: #333333 !important;
+}
+.o_list_view thead {
+    background-color: #666666 !important;
+}
+.o_list_view .o_list_table thead > tr > th:not(.o_list_record_selector) {
+    border: none !important;
+}
+.o_list_view .o_list_table thead {
+    color: #FFFFFF !important;
+}
+.o_list_view .o_list_table tr:focus-within, .o_list_view .o_list_table.table-striped tr:focus-within {
+    background-color: #666666 !important;
+}
+.o_list_view .o_list_table thead th:focus-within, .o_list_view .o_list_table tbody.o_keyboard_navigation td:focus-within {
+    background-color: #666666 !important;
+    border: 2px solid #666666 !important;
+}
+.table thead th {
+    border-color: #666666 !important;
+}
+.o_MessagingMenu_counter {
+    background-color: #fe5b1b !important;
+}
+.breadcrumb-item.active {
+    color: #333333;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #F2F2F2 !important;
+}
+.table th, .table td {
+    border-top: none !important;
+}
+.table-hover tbody tr:hover {
+    color: #4c4c4c;
+    background-color: #FFFFFF;
+}
+.nav-tabs .nav-link.active, .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover, .nav-tabs .nav-item.show .nav-link {
+    color: #333333;
+    background-color: #FFFFFF;
+    border-bottom: 3px solid #fe5b1b;
+    border-width: 0 0 3px 0;
+}
+.nav-tabs .nav-link {
+    border: 0;
+}
+.nav-tabs a.nav-link {
+    color: #666666;
+}
+a {
+    color: #0076a8;
+}
+a:hover {
+    color: #fe5b1b;
+    text-decoration: none;
+}
+.o_search_panel .list-group-item header.active {
+    background-color: #fe5b1b !important;
+    color: #FFFFFF;
+}
+
+.o_form_view .o_group .o_td_label {
+    border-right: 0 !important;
+}
+
+.o_form_view .o_group tr:nth-of-type(even) {
+    background: #F2F2F2;
+}
+
+.o_form_view .o_group tbody {
+    width: 90%;
+    float: left;
+}
+.btn-fill-primary:hover, .btn-primary:hover {
+    background-color: #fe5b1b !important;
+    border-color: #fe5b1b !important;
+}
+.btn-secondary {
+    border-color: #333333 !important;
+    background: #333333 !important;
+    color: #FFFFFF !important;
+}
+#about {
+    display: none;
+}
+
+.o_form_view .o_form_sheet_bg > .o_form_sheet {
+    min-height: 100% !important;
+}
+.o_form_view .o_form_sheet_bg {
+    height: 100% !important;
+}
+.o_form_view {
+    height: calc(100% - 15px) !important;
+}
+.iframe-ht {
+    width: 100% !important;
+    height: calc(100vh - 230px);
+}
+.alert-danger {
+    color: #d23241 !important;
+    background-color: #ffebec !important;
+    border-color: #d23241 !important;
+}
+.form-control:focus {
+    border-color: #fe5b1b !important;
+    box-shadow: none !important;
+}
+.btn-link {
+    color: #0076a8 !important;
+}
+.btn-link:hover {
+    color: #fe5b1b !important;
+}
+.o_main_navbar > a:hover, .o_main_navbar > a:focus, .o_main_navbar > button:hover, .o_main_navbar > button:focus {
+    background-color: #333333 !important;
+}
+li.o_MessagingMenu {
+    display: none !important;
+}
+
+.o_list_view table.o_list_table .text-danger {
+    color: #333333 !important;
+}
+.o_list_view .o_list_table tr:focus-within, .o_list_view .o_list_table.table-striped tr:focus-within {
+    background-color: #d6d6d6 !important;
+}
+.o_form_view .o_horizontal_separator {
+    color: #333333 !important;
+}
+#company-logo {
+    height: 38px !important;
+    width: 160px !important;
+    filter: brightness(3000%);
+    margin-top: 3px;
+}
+a.o_menu_brand {
+    display: none !important;
+}
+.login-bg .container {
+    margin-top: 160px;
+}
+.login-bg {
+    background: url(https://fsm.vertivco.com/instance-assets/vertiv-banner.jpg);
+    background-repeat: no-repeat;
+}
+.EmbedFrame-footer {
+    display: none !important;
+}
+// Custom CSS Ends
+//Next updation for web topic
+
+odoo\server\odoo\addons\web\static\src\js\chrome\abstract_web_client.js
+this.set('title_part', {"zopenerp": "Vertiv"});
