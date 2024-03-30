@@ -11,25 +11,21 @@ from odoo.exceptions import UserError, ValidationError
 class HrPayslip(models.Model):
     _name = 'hr.payslip'
     _description = 'Pay Slip'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = 'id desc'
 
     struct_id = fields.Many2one('hr.payroll.structure', string='Structure',
-        readonly=True, states={'draft': [('readonly', False)]},
         help='Defines the rules that have to be applied to this payslip, accordingly '
              'to the contract chosen. If you let empty the field contract, this field isn\'t '
              'mandatory anymore and thus the rules applied will be all the rules set on the '
              'structure of all contracts of the employee valid for the chosen period')
-    name = fields.Char(string='Payslip Name', readonly=True,
-        states={'draft': [('readonly', False)]})
-    number = fields.Char(string='Reference', readonly=True, copy=False,
-        states={'draft': [('readonly', False)]})
-    employee_id = fields.Many2one('hr.employee', string='Employee', required=True, readonly=True,
-        states={'draft': [('readonly', False)]})
-    date_from = fields.Date(string='Date From', readonly=True, required=True,
-        default=lambda self: fields.Date.to_string(date.today().replace(day=1)), states={'draft': [('readonly', False)]})
-    date_to = fields.Date(string='Date To', readonly=True, required=True,
-        default=lambda self: fields.Date.to_string((datetime.now() + relativedelta(months=+1, day=1, days=-1)).date()),
-        states={'draft': [('readonly', False)]})
+    name = fields.Char(string='Payslip Name')
+    number = fields.Char(string='Reference', copy=False)
+    employee_id = fields.Many2one('hr.employee', string='Employee', required=True)
+    date_from = fields.Date(string='Date From', required=True,
+        default=lambda self: fields.Date.to_string(date.today().replace(day=1)))
+    date_to = fields.Date(string='Date To', required=True,
+        default=lambda self: fields.Date.to_string((datetime.now() + relativedelta(months=+1, day=1, days=-1)).date()))
     # this is chaos: 4 states are defined, 3 are used ('verify' isn't) and 5 exist ('confirm' seems to have existed)
     state = fields.Selection([
         ('draft', 'Draft'),
@@ -41,28 +37,27 @@ class HrPayslip(models.Model):
                 \n* If the payslip is under verification, the status is \'Waiting\'.
                 \n* If the payslip is confirmed then status is set to \'Done\'.
                 \n* When user cancel payslip the status is \'Rejected\'.""")
-    line_ids = fields.One2many('hr.payslip.line', 'slip_id', string='Payslip Lines', readonly=True,
-        states={'draft': [('readonly', False)]})
-    company_id = fields.Many2one('res.company', string='Company', readonly=True, copy=False,
-                                 default=lambda self: self.env.company,
-                                 states={'draft': [('readonly', False)]})
-    worked_days_line_ids = fields.One2many('hr.payslip.worked_days', 'payslip_id',
-        string='Payslip Worked Days', copy=True, readonly=True,
-        states={'draft': [('readonly', False)]})
-    input_line_ids = fields.One2many('hr.payslip.input', 'payslip_id', string='Payslip Inputs',
-        readonly=True, states={'draft': [('readonly', False)]})
-    paid = fields.Boolean(string='Made Payment Order ? ', readonly=True, copy=False,
-        states={'draft': [('readonly', False)]})
-    note = fields.Text(string='Internal Note', readonly=True, states={'draft': [('readonly', False)]})
-    contract_id = fields.Many2one('hr.contract', string='Contract', readonly=True,
-        states={'draft': [('readonly', False)]})
+    line_ids = fields.One2many('hr.payslip.line', 'slip_id', string='Payslip Lines')
+    company_id = fields.Many2one(
+        'res.company', string='Company', copy=False,
+        default=lambda self: self.env.company
+    )
+    worked_days_line_ids = fields.One2many(
+        'hr.payslip.worked_days', 'payslip_id',
+        string='Payslip Worked Days', copy=True
+    )
+    input_line_ids = fields.One2many(
+        'hr.payslip.input', 'payslip_id',
+        string='Payslip Inputs', copy=True
+    )
+    paid = fields.Boolean(string='Made Payment Order ? ', copy=False)
+    note = fields.Text(string='Internal Note')
+    contract_id = fields.Many2one('hr.contract', string='Contract')
     details_by_salary_rule_category = fields.One2many('hr.payslip.line',
         compute='_compute_details_by_salary_rule_category', string='Details by Salary Rule Category')
-    credit_note = fields.Boolean(string='Credit Note', readonly=True,
-        states={'draft': [('readonly', False)]},
+    credit_note = fields.Boolean(string='Credit Note',
         help="Indicates this payslip has a refund of another")
-    payslip_run_id = fields.Many2one('hr.payslip.run', string='Payslip Batches', readonly=True,
-        copy=False, states={'draft': [('readonly', False)]})
+    payslip_run_id = fields.Many2one('hr.payslip.run', string='Payslip Batches', copy=False)
     payslip_count = fields.Integer(compute='_compute_payslip_count', string="Payslip Computation Details")
 
     def _compute_details_by_salary_rule_category(self):
@@ -118,12 +113,13 @@ class HrPayslip(models.Model):
         except ValueError:
             template_id = False
         try:
-            compose_form_id = ir_model_data.get_object_reference('mail', 'email_compose_message_wizard_form')[1]
+            compose_form_id = ir_model_data._xmlid_lookup('mail.email_compose_message_wizard_form')[1]
+
         except ValueError:
             compose_form_id = False
         ctx = {
             'default_model': 'hr.payslip',
-            'default_res_id': self.ids[0],
+            'default_res_ids': self.ids,
             'default_use_template': bool(template_id),
             'default_template_id': template_id,
             'default_composition_mode': 'comment',
@@ -174,6 +170,8 @@ class HrPayslip(models.Model):
             # if we don't give the contract, then the rules to apply should be for all current contracts of the employee
             contract_ids = payslip.contract_id.ids or \
                 self.get_contract(payslip.employee_id, payslip.date_from, payslip.date_to)
+            if not contract_ids:
+                raise ValidationError(_("No running contract found for the employee: %s or no contract in the given period" % payslip.employee_id.name))
             lines = [(0, 0, line) for line in self._get_payslip_lines(contract_ids, payslip.id)]
             payslip.write({'line_ids': lines, 'number': number})
         return True
@@ -200,22 +198,27 @@ class HrPayslip(models.Model):
                 current_leave_struct = leaves.setdefault(holiday.holiday_status_id, {
                     'name': holiday.holiday_status_id.name or _('Global Leaves'),
                     'sequence': 5,
-                    'code': holiday.holiday_status_id.name or 'GLOBAL',
+                    'code': holiday.holiday_status_id.code or 'GLOBAL',
                     'number_of_days': 0.0,
                     'number_of_hours': 0.0,
                     'contract_id': contract.id,
                 })
-                current_leave_struct['number_of_hours'] += hours
+                current_leave_struct['number_of_hours'] -= hours
                 work_hours = calendar.get_work_hours_count(
                     tz.localize(datetime.combine(day, time.min)),
                     tz.localize(datetime.combine(day, time.max)),
                     compute_leaves=False,
                 )
                 if work_hours:
-                    current_leave_struct['number_of_days'] += hours / work_hours
+                    current_leave_struct['number_of_days'] -= hours / work_hours
 
             # compute worked days
-            work_data = contract.employee_id._get_work_days_data(day_from, day_to, calendar=contract.resource_calendar_id)
+            work_data = contract.employee_id._get_work_days_data(
+                day_from,
+                day_to,
+                calendar=contract.resource_calendar_id,
+                compute_leaves=False,
+            )
             attendances = {
                 'name': _("Normal Working Days paid at 100%"),
                 'sequence': 1,
@@ -359,7 +362,7 @@ class HrPayslip(models.Model):
                     #check if there is already a rule computed with that code
                     previous_amount = rule.code in localdict and localdict[rule.code] or 0.0
                     #set/overwrite the amount computed for this rule in the localdict
-                    tot_rule = amount * qty * rate / 100.0
+                    tot_rule = contract.company_id.currency_id.round(amount * qty * rate / 100.0)
                     localdict[rule.code] = tot_rule
                     rules_dict[rule.code] = rule
                     #sum the amount for its salary category
@@ -579,22 +582,25 @@ class HrPayslipRun(models.Model):
     _name = 'hr.payslip.run'
     _description = 'Payslip Batches'
 
-    name = fields.Char(required=True, readonly=True, states={'draft': [('readonly', False)]})
-    slip_ids = fields.One2many('hr.payslip', 'payslip_run_id', string='Payslips', readonly=True,
-                               states={'draft': [('readonly', False)]})
+    name = fields.Char(required=True)
+    slip_ids = fields.One2many('hr.payslip', 'payslip_run_id', string='Payslips')
     state = fields.Selection([
         ('draft', 'Draft'),
         ('done', 'Done'),
         ('close', 'Close'),
     ], string='Status', index=True, readonly=True, copy=False, default='draft')
-    date_start = fields.Date(string='Date From', required=True, readonly=True,
-                             states={'draft': [('readonly', False)]}, default=lambda self: fields.Date.to_string(date.today().replace(day=1)))
-    date_end = fields.Date(string='Date To', required=True, readonly=True,
-                           states={'draft': [('readonly', False)]},
-                           default=lambda self: fields.Date.to_string((datetime.now() + relativedelta(months=+1, day=1, days=-1)).date()))
-    credit_note = fields.Boolean(string='Credit Note', readonly=True,
-                                 states={'draft': [('readonly', False)]},
-                                 help="If its checked, indicates that all payslips generated from here are refund payslips.")
+    date_start = fields.Date(
+        string='Date From', required=True,
+        default=lambda self: fields.Date.to_string(date.today().replace(day=1))
+    )
+    date_end = fields.Date(
+        string='Date To', required=True,
+        default=lambda self: fields.Date.to_string((datetime.now() + relativedelta(months=+1, day=1, days=-1)).date())
+    )
+    credit_note = fields.Boolean(
+        string='Credit Note',
+        help="If its checked, indicates that all payslips generated from here are refund payslips."
+    )
 
     def draft_payslip_run(self):
         return self.write({'state': 'draft'})
