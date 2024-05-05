@@ -1,0 +1,88 @@
+<odoo>
+
+<data>
+    <record id="product_model_form" model="ir.ui.view">
+        <field name="name">Product model form</field>
+        <field name="model">product.model</field>
+        <field name="arch" type="xml">
+            <form string="Product Model">
+                <sheet>
+                    <group>
+                        <field name="model"/>
+                        <field name="product_group"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="product_model_tree" model="ir.ui.view">
+        <field name="name">Product model tree</field>
+        <field name="model">product.model</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="model"/>
+                <field name="product_group"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="product_rating_form" model="ir.ui.view">
+        <field name="name">Product rating form</field>
+        <field name="model">product.rating</field>
+        <field name="arch" type="xml">
+            <form string="Product Model">
+                <sheet>
+                    <group>
+                        <field name="model"/>
+                        <field name="rating"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="product_rating_tree" model="ir.ui.view">
+        <field name="name">Product rating tree</field>
+        <field name="model">product.rating</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="model"/>
+                <field name="rating"/>
+            </tree>
+        </field>
+    </record>
+
+<!--    <record id="product_model_action" model="ir.actions.act_window">-->
+<!--        <field name="name">Product Model</field>-->
+<!--        <field name="type">ir.actions.act_window</field>-->
+<!--        <field name="res_model">product.model</field>-->
+<!--        <field name="view_mode">tree,form</field>-->
+<!--    </record>-->
+
+<!--    <record id="product_rating_action" model="ir.actions.act_window">-->
+<!--        <field name="name">Product Rating</field>-->
+<!--        <field name="type">ir.actions.act_window</field>-->
+<!--        <field name="res_model">product.rating</field>-->
+<!--        <field name="view_mode">tree,form</field>-->
+<!--    </record>-->
+
+
+<!--    <menuitem id="product_model_menu"-->
+<!--              name="Product Model"-->
+<!--              sequence="2"-->
+<!--              action="product_model_action"-->
+<!--              parent="Vertiv.first_level_menu8"-->
+<!--              groups="tl_group,opr_group,zone_group,vertiv_admin_group"-->
+<!--            />-->
+
+<!--    <menuitem id="product_rating_menu"-->
+<!--                  name="Product Rating"-->
+<!--                  sequence="3"-->
+<!--                  action="product_rating_action"-->
+<!--                  parent="Vertiv.first_level_menu8"-->
+<!--                  groups="tl_group,opr_group,zone_group,vertiv_admin_group"-->
+<!--                />-->
+
+</data>
+</odoo>

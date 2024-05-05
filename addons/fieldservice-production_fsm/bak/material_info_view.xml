@@ -1,0 +1,41 @@
+<odoo>
+
+    <record model="ir.actions.act_window" id="material_info_action">
+        <field name="name">Material info</field>
+        <field name="res_model">material.info</field>
+        <field name="view_mode">tree,form</field>
+     </record>
+
+    <record id="material_view_tree" model="ir.ui.view">
+        <field name="name">material.form.tree</field>
+        <field name="model">material.info</field>
+        <field name="arch" type="xml">
+            <tree string="Product" >
+                <field name="part_activity" />
+                <field name="part_replace_date"/>
+                <field name="part_code"/>
+                <field name="part_description" />
+                <field name="part_qty"/>
+                <field name="product_serialno"/>
+           </tree>
+        </field>
+    </record>
+
+    <record id="Material_form_view" model="ir.ui.view">
+        <field name="name">Material form</field>
+        <field name="model">material.info</field>
+         <field name="arch" type="xml">
+             <form>
+                 <field name="call_id" />
+                 <field name="part_activity" />
+                 <field name="part_replace_date"/>
+                 <field name="part_code"/>
+                 <field name="part_description"/>
+                 <field name="product_serialno"/>
+             </form>
+         </field>
+    </record>
+
+
+</odoo>
+

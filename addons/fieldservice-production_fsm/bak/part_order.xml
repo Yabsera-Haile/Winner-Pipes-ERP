@@ -1,0 +1,80 @@
+<odoo>
+    <act_window id="action_part_order"
+                name="Part Order details"
+                res_model="partorder.info"
+                view_mode="tree,form"/>
+
+    <act_window id="action_part_items"
+                name="Part item details"
+                res_model="parts.item.info"
+                view_mode="tree,form"/>
+
+    <record id="parts_item_tree" model="ir.ui.view">
+        <field name="name">Order.item.form.tree</field>
+        <field name="model">parts.item.info</field>
+        <field name="arch" type="xml">
+            <tree string="Part Items" >
+                <field name="item_number"/>
+                <field name="item_desc"/>
+                 <field name="qty"/>
+            </tree>
+        </field>
+    </record>
+
+
+
+
+
+     <record id="parts_order_tree" model="ir.ui.view">
+        <field name="name">Order.form.tree</field>
+        <field name="model">partorder.info</field>
+        <field name="arch" type="xml">
+            <tree string="Part code" >
+                 <field name="order_number" />
+                <field name="order_date" />
+                <field name="shipping_address"/>
+                <field name="order_status"/>
+                <field name="shipped_date"/>
+                <field name="order_expected_date"/>
+                <field name="call_engineer"/>
+                <field name="call_city"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="Part_order_form_view" model="ir.ui.view">
+        <field name="name">Part order form</field>
+        <field name="model">partorder.info</field>
+         <field name="arch" type="xml">
+             <form>
+                 <group>
+                     <field name="call_id" />
+                     <field name="call_engineer"/>
+                     <group>
+                            <field name="order_number" />
+                     <field name="order_date"/>
+                     </group>
+
+                    <group>
+                        <field name="shipping_address"/>
+
+                     <field name="call_city"/>
+                    <field name="order_status"/>
+                     <field name="shipped_date"/>
+                    <field name="order_expected_date"/>
+                    </group>
+
+                     <notebook>
+                     <page string="Part Items">
+                           <group>
+                                <field name="item_ids"/>
+                            </group>
+                        </page>
+                 </notebook>
+                 </group>
+
+             </form>
+         </field>
+    </record>
+</odoo>

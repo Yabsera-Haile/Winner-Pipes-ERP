@@ -1,0 +1,179 @@
+<odoo>
+
+    <record id="engg_occup_report" model="ir.ui.view">
+        <field name="name">Engineer Occupancy Report</field>
+        <field name="model">enggoccupancy.report</field>
+        <field name="arch" type="xml">
+            <tree string="Engineer Occupancy Report">
+                <field name="engineerId"/>
+                      <field name="call_type"/>
+                      <field name="calls"/>
+                      <field name="occupied_time"  widget="float_time"/>
+                    <field name="attended_date" />
+
+           </tree>
+        </field>
+    </record>
+
+    <record id="engg_occupancy_action" model="ir.actions.act_window">
+        <field name="name">Engineer Occupancy report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">enggoccupancy.report</field>
+        <field name="view_mode">tree</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            <!-- Add Text Here -->
+          </p><p>
+            <!-- More details about what a user can do with this object will be OK -->
+          </p>
+        </field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+
+<record id="occupancy_search" model="ir.ui.view">
+   <field name="name">occupancy search</field>
+   <field name="model">enggoccupancy.report</field>
+    <field name="arch" type="xml">
+        <search string="Occupancy Report">
+              <field name="engineerId"/>
+          <group expand="1" string="Group By">
+                    <filter string="Engineer" name="group_by_engineer" context="{'group_by': 'engineerId'}"/>
+                      <filter string="Call Type" name="group_by_call_type" context="{'group_by': 'call_type'}"/>
+                  <filter string="Date" name="group_by_date" context="{'group_by': 'attended_date'}"/>
+          </group>
+    </search>
+   </field>
+</record>
+
+
+   <record id="resolution_code_report" model="ir.ui.view">
+        <field name="name">Resolution Code Report</field>
+        <field name="model">resolution.report</field>
+        <field name="arch" type="xml">
+            <tree string="Engineer Occupancy Report">
+                <field name="resolution_code_description"/>
+                      <field name="engineerId"/>
+                      <field name="calls"/>
+                     <field name="attended_date" invisible="1"/>
+                 <field name="product_model" invisible="1"/>
+                 <field name="product_group" invisible="1"/>
+
+           </tree>
+        </field>
+   </record>
+
+    <record id="res_code_action" model="ir.actions.act_window">
+        <field name="name">Resolution Code Summary</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">resolution.report</field>
+        <field name="view_mode">tree</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+            </p>
+            <p>
+                <!-- More details about what a user can do with this object will be OK -->
+            </p>
+        </field>
+    </record>
+
+    <record id="resolution_code_zone_report" model="ir.ui.view">
+        <field name="name">Resolution Code Zone</field>
+        <field name="model">zone.resolution.report</field>
+        <field name="arch" type="xml">
+            <tree string="Resolution Code Summary">
+                <field name="resolution_code_description"/>
+
+                <field name="calls"/>
+                <field name="zone"/>
+                 <field name="sr_group"/>
+                     <field name="attended_date" invisible="1"/>
+                 <field name="product_model" invisible="1"/>
+                 <field name="product_group" invisible="1"/>
+
+           </tree>
+        </field>
+    </record>
+
+ <record id="res_zone_action" model="ir.actions.act_window">
+        <field name="name">Resolution Code Summary</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">zone.resolution.report</field>
+        <field name="view_mode">tree</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            <!-- Add Text Here -->
+          </p><p>
+            <!-- More details about what a user can do with this object will be OK -->
+          </p>
+        </field>
+ </record>
+
+     <record id="resolution_zone_search" model="ir.ui.view">
+         <field name="name">resolution.search</field>
+         <field name="model">zone.resolution.report</field>
+         <field name="arch" type="xml">
+             <search string="search">
+
+                 <field name="calls"/>
+                 <field name="zone"/>
+                 <field name="sr_group"/>
+                 <separator/>
+                 <group expand="0" string="Group By">
+                     <filter string="Resolution Code" name="group_by_rc" context="{'group_by': 'resolution_code_description'}"/>
+                    <filter string="Zone" name="group_by_zone" context="{'group_by': 'zone'}"/>
+                     <filter string="SR Group" name="group_by_sr" context="{'group_by': 'sr_group'}"/>
+                     <filter string="Model" name="group_by_product_model" context="{'group_by': 'product_model'}"/>
+                     <filter string="Product Group" name="group_by_product" context="{'group_by': 'product_group'}"/>
+<!--                    <filter string="Product Group" name="group_by_product_group"-->
+<!--                            context="{'group_by': 'product_group'}"/>-->
+
+<!--                    <filter string="Status" name="group_by_status" context="{'group_by': 'call_status'}"/>-->
+<!--                    <separator/>-->
+                    <filter string="Call Attended" name="group_by_date_attended" context="{'group_by': 'attended_date'}"/>
+                     <!--                    <filter string="Engineer Attendance" name="group_by_attendance"-->
+                     <!--                            context="{'group_by': 'check_out'}"/>-->
+                     <separator/>
+
+                 </group>
+
+             </search>
+         </field>
+     </record>
+
+    <record id="resolution_search" model="ir.ui.view">
+        <field name="name">resolution.search</field>
+        <field name="model">resolution.report</field>
+        <field name="arch" type="xml">
+            <search string="search">
+
+                <field name="calls"/>
+                <field name="zone"/>
+                <field name="sr_group"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="Resolution Code" name="group_by_rc"
+                            context="{'group_by': 'resolution_code_description'}"/>
+                    <filter string="Zone" name="group_by_zone" context="{'group_by': 'zone'}"/>
+                    <filter string="SR Group" name="group_by_sr" context="{'group_by': 'sr_group'}"/>
+                    <filter string="Model" name="group_by_product_model" context="{'group_by': 'product_model'}"/>
+                    <filter string="Product Group" name="group_by_product" context="{'group_by': 'product_group'}"/>
+                    <!--                    <filter string="Product Group" name="group_by_product_group"-->
+                    <!--                            context="{'group_by': 'product_group'}"/>-->
+
+                    <!--                    <filter string="Status" name="group_by_status" context="{'group_by': 'call_status'}"/>-->
+                    <!--                    <separator/>-->
+                    <filter string="Call Attended" name="group_by_date_attended"
+                            context="{'group_by': 'attended_date'}"/>
+                    <!--                    <filter string="Engineer Attendance" name="group_by_attendance"-->
+                    <!--                            context="{'group_by': 'check_out'}"/>-->
+                    <separator/>
+
+                </group>
+
+            </search>
+        </field>
+    </record>
+
+</odoo>

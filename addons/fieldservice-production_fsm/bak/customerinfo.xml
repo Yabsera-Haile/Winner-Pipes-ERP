@@ -1,0 +1,93 @@
+<odoo>
+
+     <record model="ir.actions.act_window" id="customer_info_model_action">
+        <field name="name">Customer info</field>
+        <field name="res_model">customer.info.model</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+
+
+
+
+    <record model="ir.actions.act_window" id="custproduct_info_model_action">
+        <field name="name">Customers Product</field>
+        <field name="res_model">custproduct.info.model</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="call_info_model_action">
+        <field name="name">Call View</field>
+        <field name="res_model">call.info.model</field>
+        <field name="view_mode">tree,form,kanban,calendar</field>
+    </record>
+
+    <record id="call_view_tree" model="ir.ui.view">
+        <field name="name">realestate.reason.tree</field>
+        <field name="model">call.info.model</field>
+        <field name="arch" type="xml">
+            <tree string="Calls">
+                <field name="callnumber"/>
+                <field name="callstatus"/>
+                <field name="calllogdate"/>
+                <field name="productId"/>
+                <field name="customername"/>
+                <field name="customercity"/>
+                <field name="customerstate"/>
+                <field name="customerpincode"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="crm_case_calendar_view_leads" model="ir.ui.view">
+        <field name="name">crm.lead.calendar.lead</field>
+        <field name="model">call.info.model</field>
+        <field name="priority" eval="2"/>
+        <field name="arch" type="xml">
+            <calendar string="Leads Generation" create="0" mode="month" date_start="calllogdate" hide_time="true"
+                      event_limit="5">
+                <field name="callnumber"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="call_view_kanban" model="ir.ui.view">
+        <field name="name">callinfo.reason.kanban</field>
+        <field name="model">call.info.model</field>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="callstatus">
+                <field name="callnumber"/>
+                <field name="callstatus"/>
+                <field name="customername"/>
+            </kanban>
+        </field>
+    </record>
+
+
+    <record id="call_info_model_form_view" model="ir.ui.view">
+        <field name="name">crm.lost.reason.forms</field>
+        <field name="model">call.info.model</field>
+        <field name="arch" type="xml">
+            <form string="Call View">
+                <group>
+
+                    <field name="callnumber" string="Call No" width="50"/>
+                    <field name="callstatus" string="Status" width="50"/>
+                    <field name="calltype" string="Type" width="40"/>
+                    <field name="calllogdate" string="Log date" width="12"/>
+                    <field name="engineerId" string="Engineer"/>
+                </group>
+                <group>
+                    <field name="productId" string="Serial number"/>
+                    <field name="customername" string="Customer Name"/>
+                    <field name="customercity" string="City"/>
+                    <field name="customerstate" string="State"/>
+
+                </group>
+
+            </form>
+        </field>
+    </record>
+
+</odoo>

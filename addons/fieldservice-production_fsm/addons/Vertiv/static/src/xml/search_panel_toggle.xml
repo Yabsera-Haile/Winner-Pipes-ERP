@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+	<t t-name="SearchPanel.HideButton">
+		<button class="btn-search-panel-toggle fa fa-caret-left  hide-panel fa-2x" />
+	</t>
+</templates>

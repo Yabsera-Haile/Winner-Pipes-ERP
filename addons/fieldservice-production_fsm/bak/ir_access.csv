@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_custinfo,access_custinfo,customer_info_model,,1,1,1,1
+

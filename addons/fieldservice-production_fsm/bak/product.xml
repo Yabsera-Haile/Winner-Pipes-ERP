@@ -1,0 +1,53 @@
+<odoo>
+
+
+
+        <record id="product_action" model="ir.actions.act_window">
+        <field name="name">Product</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.info.model</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            <!-- Add Text Here -->
+          </p><p>
+            <!-- More details about what a user can do with this object will be OK -->
+          </p>
+        </field>
+    </record>
+
+    <record id="product_tree" model="ir.ui.view">
+        <field name="name">Products</field>
+        <field name="model">product.info.model</field>
+        <field name="arch" type="xml">
+            <tree string="Products">
+
+                <field name="productmodel"/>
+                <field name="productcode"/>
+                <field name="product_group" />
+                <field name="productrating"/>
+                <field name="productnonempi"/>
+                </tree>
+        </field>
+    </record>
+
+    <record id="product_form" model="ir.ui.view">
+        <field name="name">Products</field>
+        <field name="model">product.info.model</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                       <field name="productmodel"/>
+                <field name="productcode"/>
+                <field name="product_group"  options="{'no_create_edit': True}"/>
+                <field name="productrating"/>
+                <field name="productnonempi"/>
+                    </group>
+
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

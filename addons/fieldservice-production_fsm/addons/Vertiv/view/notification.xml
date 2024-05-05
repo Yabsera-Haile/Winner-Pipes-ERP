@@ -1,0 +1,51 @@
+<odoo>
+
+    <record id="notification_form" model="ir.ui.view">
+        <field name="name">Notification</field>
+        <field name="model">notification</field>
+        <field name="arch" type="xml">
+            <form string="Notifications Sent">
+                <sheet>
+                    <group>
+                        <field name="notification_type"/>
+                        <field name="notification_from"/>
+                        <field name="subject"/>
+                        <field name="body"/>
+                        <field name="sent_time"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="notication_view" model="ir.ui.view">
+        <field name="name">Notification</field>
+        <field name="model">notification</field>
+        <field name="arch" type="xml">
+            <tree string="Notification triggers">
+                <field name="notification_type"/>
+                <field name="notification_from"/>
+                <field name="subject"/>
+                <field name="body"/>
+                <field name="sent_time"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="notification_act" model="ir.actions.act_window">
+        <field name="name">Notification View</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">notification</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+            </p>
+            <p>
+                <!-- More details about what a user can do with this object will be OK -->
+            </p>
+        </field>
+    </record>
+
+
+</odoo>

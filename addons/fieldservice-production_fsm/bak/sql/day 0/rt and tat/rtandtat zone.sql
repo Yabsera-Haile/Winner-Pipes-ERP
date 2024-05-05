@@ -1,0 +1,7 @@
+SELECT "source"."Distance" AS "Distance", avg("source"."Tat") AS "Average TAT", avg("source"."Response Time [RT]") AS "Average Response TIme"
+FROM (SELECT "public"."cms_info_model"."call_actual_enddate" AS "call_actual_enddate", "public"."cms_info_model"."call_log_date" AS "call_log_date", "public"."cms_info_model"."call_actual_startdate" AS "call_actual_startdate", "public"."cms_info_model"."call_status" AS "call_status", "public"."cms_info_model"."customer_distance_category" AS "customer_distance_category",
+extract(epoch from("public"."cms_info_model"."call_actual_enddate" - "public"."cms_info_model"."call_log_date"))/3600 AS "Tat",
+extract(epoch from("public"."cms_info_model"."call_actual_startdate" - "public"."cms_info_model"."call_log_date"))/3600 AS "Response Time [RT]", CASE WHEN "public"."cms_info_model"."customer_distance_category" = 'A (0-30km)' THEN 'Local' WHEN "public"."cms_info_model"."customer_distance_category" = 'A (0-50km)' THEN 'Local' ELSE 'Upcountry' END AS "Distance", "public"."cms_info_model"."product_group" AS "product_group" FROM "public"."cms_info_model" where {{call_log_date}}) "source"
+WHERE "source"."product_group" = 'AIR'
+GROUP BY "source"."Distance"
+ORDER BY "source"."Distance" ASC

@@ -1,0 +1,39 @@
+<odoo>
+<!--    <act_window id="action_part_details"-->
+<!--                name="Part details"-->
+<!--                res_model="partcode.info"-->
+<!--                view_mode="tree,form"/>-->
+
+
+     <record id="parts_view_tree" model="ir.ui.view">
+        <field name="name">parts.form.tree</field>
+        <field name="model">partcode.info</field>
+        <field name="arch" type="xml">
+            <tree string="Part code" >
+                <field name="organisation_code" />
+                <field name="organisation_name" />
+                <field name="subinventory"/>
+                <field name="item_number"/>
+                <field name="item_desc"/>
+                <field name="on_hand_qty"/>
+           </tree>
+        </field>
+    </record>
+    <record id="Partcode_form_view" model="ir.ui.view">
+        <field name="name">Partdetails form</field>
+        <field name="model">partcode.info</field>
+         <field name="arch" type="xml">
+             <form>
+                 <group>
+                     <field name="organisation_code" />
+                    <field name="organisation_name" />
+                    <field name="subinventory"/>
+                    <field name="item_number"/>
+                    <field name="item_desc"/>
+                    <field name="on_hand_qty"/>
+                 </group>
+
+             </form>
+         </field>
+    </record>
+</odoo>
